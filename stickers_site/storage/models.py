@@ -32,6 +32,7 @@ class StickersMain(models.Model):
     class Meta:
         verbose_name = 'Інфу про стікери'
         verbose_name_plural = 'Інфа про стікери'
+        ordering = ['pk']
 
 
 class StickersDima(models.Model):
@@ -44,6 +45,7 @@ class StickersDima(models.Model):
     class Meta:
         verbose_name = 'Склад Діми'
         verbose_name_plural = 'Склад Діми'
+        ordering = ['stickers_main']
 
 
 class StickersVlad(models.Model):
@@ -56,3 +58,4 @@ class StickersVlad(models.Model):
     class Meta:
         verbose_name = 'Склад Влада'
         verbose_name_plural = 'Склад Влада'
+        ordering = ['stickers_main']

@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+<h1 id="main_text"><a href="/">Dima production</a></h1>
+{% include 'inc/_menu.html '%}
+<div id="main">
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>
