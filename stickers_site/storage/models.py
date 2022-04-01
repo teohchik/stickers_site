@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import get_object_or_404
 
 
 class Category(models.Model):
@@ -22,9 +23,11 @@ class StickersMain(models.Model):
     is_published = models.BooleanField(default=True, verbose_name='Опубліковано?')
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # Call the "real" save() method.
-        StickersDima.objects.create(stickers_main_id=self.pk)
-        StickersVlad.objects.create(stickers_main_id=self.pk)
+        super().save(*args, **kwargs)
+        flag = get_object_or_404(StickersMain, pk=self.pk)
+        if flag:
+            StickersDima.objects.create(stickers_main_id=self.pk)
+            StickersVlad.objects.create(stickers_main_id=self.pk)
 
     def __str__(self):
         return f"{self.pk} - {self.title}"
