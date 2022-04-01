@@ -36,7 +36,8 @@ class StickersMain(models.Model):
 
 
 class StickersDima(models.Model):
-    stickers_main = models.ForeignKey('StickersMain', on_delete=models.CASCADE, verbose_name='ID пака')
+    stickers_main = models.ForeignKey('StickersMain', on_delete=models.CASCADE, verbose_name='ID пака',
+                                      related_name='storage_dima')
     quantity = models.IntegerField(default=0, verbose_name='Кількість у Діми')
 
     def __str__(self):
@@ -49,7 +50,8 @@ class StickersDima(models.Model):
 
 
 class StickersVlad(models.Model):
-    stickers_main = models.ForeignKey('StickersMain', on_delete=models.CASCADE, verbose_name='ID пака')
+    stickers_main = models.ForeignKey('StickersMain', on_delete=models.CASCADE, verbose_name='ID пака',
+                                      related_name='storage_vlad')
     quantity = models.IntegerField(default=0, verbose_name='Кількість у Влада')
 
     def __str__(self):
