@@ -21,9 +21,10 @@ class StickersMain(models.Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE, verbose_name='Категорія')
     is_published = models.BooleanField(default=True, verbose_name='Опубліковано?')
 
-    def __new__(cls, pk,  *args, **kwargs):
-        StickersDima.objects.create(stickers_main_id=cls.pk)
-        print('ya ebal')
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+        StickersDima.objects.create(stickers_main_id=self.pk)
+        StickersVlad.objects.create(stickers_main_id=self.pk)
 
     def __str__(self):
         return f"{self.pk} - {self.title}"
