@@ -3,12 +3,13 @@ from .models import StickersMain, StickersDima
 
 # Create your views here.
 
+
 def storage_all(request):
     return render(request, 'storage/all_storage.html', {})
 
 
 def storage_dima_vlad(request):
-    storage_dima = StickersDima.objects.all()
+    storage_dima = StickersDima.objects.select_related('stickers_main').all()
 
     for pack in storage_dima:
         quantity = pack.quantity
