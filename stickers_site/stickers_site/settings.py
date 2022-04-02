@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
 
     'storage.apps.StorageConfig',
+    'order_management.apps.OrderManagementConfig',
 ]
 
 MIDDLEWARE = [

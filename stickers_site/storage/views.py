@@ -31,6 +31,4 @@ def formatting_quantity(storage):
     return storage
 
 
-def order_management(request):
-    return render(request, 'storage/order_management.html', {})
 
