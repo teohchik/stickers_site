@@ -9,19 +9,21 @@
 {% endblock %}
 
 {% block content %}
-<h1>Склад Дімона і Владоса</h1>
-<div id="main_div">
-    <div>
-        {% for pack in storage_dima %}
+<h2>Склад Дімона і Владоса</h2>
+<main>
+    {% for el in storages %}
         <div>
-            <img src="{{ pack.stickers_main.photo.url }}" alt="" width="350px">
-            <p>{{pack.stickers_main.title}}</p>
-            <p>В паці: {{pack.stickers_main.quantity_in_pack}} шт</p>
-            <p>На складі: {{pack.quantity}} шт</p>
-            <p></p>
+            <h3>{{el.owner_storage}}</h3>
+            {% for pack in el.storage %}
+            <div id="content">
+                <img src="{{ pack.stickers_main.photo.url }}" alt="" width="250px">
+                <p>{{pack.stickers_main.title}}</p>
+                <p>В паці: {{pack.stickers_main.quantity_in_pack}} шт</p>
+                <p>На складі: {{pack.quantity}} шт</p>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
-    <div></div>
-</div>
+    {% endfor %}
+</main>
+
 {% endblock %}

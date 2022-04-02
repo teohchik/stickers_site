@@ -1,5 +1,25 @@
-#main_div{
+main{
+    width: 50%;
+    margin: 0 auto;
+}
+h2 {
+    text-align: center;
+}
+h3{
+    text-align: center;
+}
+
+#menu > ul > li:nth-child(2) > a{
+    color: #FFC0CB;
+}
+
+main{
     display: flex;
     justify-content: space-between;
-    width: 80%;
+}
+#content{
+    padding: 30px;
+    background-color: #0a0a0a;
+    text-align: center;
+    margin-bottom: 20px;
 }

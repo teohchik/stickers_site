@@ -1,0 +1,18 @@
+body{
+    background-color: #121212;
+    margin: 0;
+    padding: 0;
+    font-family: "Gotham Pro", sans-serif;
+}
+a{
+    text-decoration: none;
+
+}
+a:hover{
+    color: #FFC0CB;
+    transition-delay: 0.1s;
+}
+
+p, a, h1, h2, h3, h4, h5, h6{
+    color: #dedede;
+}

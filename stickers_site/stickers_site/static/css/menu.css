@@ -1,0 +1,20 @@
+#menu{
+    height: 80px;
+    background-color: #0a0a0a;
+    width: 100%;
+    padding-top: 50px;
+}
+#menu > ul{
+    width: 750px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 0 auto;
+    background-color: #0a0a0a;
+    vertical-align: middle;
+}
+
+#menu > ul > li > a{
+    font-size: 22px;
+    font-weight: 400;
+
+}
