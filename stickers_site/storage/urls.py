@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import storage_all, storage_dima_vlad
+from .views import all_storage, order_management
 
 urlpatterns = [
-    path('', storage_dima_vlad, name='storage_dima_vlad'),
-    path('all_storage/', storage_all, name='storage_all'),
+    path('', all_storage, name='all_storage'),
+    path('order_management/', order_management, name='order_management'),
+
 ]

@@ -4,12 +4,7 @@ from .models import StickersMain, StickersDima, StickersVlad
 
 # Create your views here.
 
-
-def storage_all(request):
-    return render(request, 'storage/all_storage.html', {})
-
-
-def storage_dima_vlad(request):
+def all_storage(request):
     storage_dima = StickersDima.objects.select_related('stickers_main').all()
     storage_vlad = StickersVlad.objects.select_related('stickers_main').all()
 
@@ -21,7 +16,7 @@ def storage_dima_vlad(request):
                      {'storage': storage_vlad, 'owner_storage': 'Склад Влада'}],
     }
 
-    return render(request, 'storage/storage_dima_vlad.html', context)
+    return render(request, 'storage/all_storage.html', context)
 
 
 def formatting_quantity(storage):
@@ -33,4 +28,9 @@ def formatting_quantity(storage):
             pack.quantity = int(quantity/quantity_in_pack)
         else:
             pack.quantity = quantity/quantity_in_pack
+    return storage
+
+
+def order_management(request):
+    return render(request, 'storage/order_management.html', {})
 
