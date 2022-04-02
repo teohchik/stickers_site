@@ -1,9 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from storage.models import Category, StickersMain
+
 
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Запаковує', blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Запаковує')
     status = [
         (1, 'processing'),
         (2, 'success'),
@@ -15,11 +17,26 @@ class Order(models.Model):
     price = models.IntegerField(verbose_name='Сума')
     ttn = models.CharField(max_length=255, blank=True, verbose_name='ТТН')
 
-
     def __str__(self):
         return f"{self.pk}"
 
     class Meta:
         verbose_name = 'Замовлення'
         verbose_name_plural = 'Замовлення'
+        ordering = ['pk']
+
+
+class OrderProduct(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категорія')
+    product = models.ForeignKey(StickersMain, on_delete=models.CASCADE, verbose_name='Товар')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Замовлення')
+    quantity = models.IntegerField(verbose_name='Кількість')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Запаковує')
+
+    def __str__(self):
+        return f"{self.pk}"
+
+    class Meta:
+        verbose_name = 'Товар в замовлення'
+        verbose_name_plural = 'Товари в замовленні'
         ordering = ['pk']
