@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import order_management_command
+from .views import add_order
 
 urlpatterns = [
-    path('', order_management_command, name='order_management_command'),
+    path('add_order/', add_order, name='add_order'),
 
 ]

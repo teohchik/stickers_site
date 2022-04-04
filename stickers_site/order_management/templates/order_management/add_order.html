@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Управління замовленнями
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'order_management/css/add_order.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>Додавай до замовлення</h2>
+<main>
+{% for el in storages %}
+    <div>
+        <h3>{{el.owner_storage}}</h3>
+        {% for pack in el.storage %}
+        <div id="content">
+            <img src="{{ pack.stickers_main.photo.url }}" alt="" width="250px">
+            <p>{{pack.stickers_main.title}}</p>
+            <p>В паці: {{pack.stickers_main.quantity_in_pack}} шт</p>
+            <p>На складі: {{pack.quantity}} шт</p>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ el.form.as_p }}
+
+                <input type="submit" value="Додати в замовлення">
+            </form>
+
+        </div>
+        {% endfor %}
+    </div>
+{% endfor %}
+</main>
+
+{% endblock %}
+

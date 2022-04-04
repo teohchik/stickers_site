@@ -1,34 +1,37 @@
 from django.shortcuts import render
-from .models import StickersMain, StickersDima, StickersVlad
+from .models import StickersMain, StickersStorage
 
 
 # Create your views here.
 
 def all_storage(request):
-    storage_dima = StickersDima.objects.select_related('stickers_main').all()
-    storage_vlad = StickersVlad.objects.select_related('stickers_main').all()
+    storages = StickersStorage.objects.select_related('stickers_main').all()
 
-    formatting_quantity(storage_dima)
-    formatting_quantity(storage_vlad)
+    formatting_quantity(storages)
 
     context = {
-        "storages": [{'storage': storage_dima, 'owner_storage': 'Склад Діми'},
-                     {'storage': storage_vlad, 'owner_storage': 'Склад Влада'}],
+        "storages": storages,
     }
 
     return render(request, 'storage/all_storage.html', context)
 
 
-def formatting_quantity(storage):
-    for pack in storage:
-        quantity = pack.quantity
+def formatting_quantity(storages):
+
+    for pack in storages:
+        quantity_dima = pack.quantity_dima
+        quantity_vlad = pack.quantity_vlad
+
         quantity_in_pack = pack.stickers_main.quantity_in_pack
 
-        if quantity % quantity_in_pack == 0:
-            pack.quantity = int(quantity/quantity_in_pack)
+        if quantity_dima % quantity_in_pack == 0:
+            pack.quantity_dima = int(quantity_dima / quantity_in_pack)
         else:
-            pack.quantity = quantity/quantity_in_pack
-    return storage
+            pack.quantity_dima = quantity_dima / quantity_in_pack
 
+        if quantity_vlad % quantity_in_pack == 0:
+            pack.quantity_vlad = int(quantity_vlad / quantity_in_pack)
+        else:
+            pack.quantity_vlad = quantity_vlad / quantity_in_pack
 
 

@@ -26,8 +26,7 @@ class StickersMain(models.Model):
         super().save(*args, **kwargs)
         flag = get_object_or_404(StickersMain, pk=self.pk)
         if flag:
-            StickersDima.objects.create(stickers_main_id=self.pk)
-            StickersVlad.objects.create(stickers_main_id=self.pk)
+            StickersStorage.objects.create(stickers_main_id=self.pk)
 
     def __str__(self):
         return f"{self.pk} - {self.title}"
@@ -38,29 +37,18 @@ class StickersMain(models.Model):
         ordering = ['pk']
 
 
-class StickersDima(models.Model):
+class StickersStorage(models.Model):
     stickers_main = models.ForeignKey('StickersMain', on_delete=models.CASCADE, verbose_name='ID пака',
-                                      related_name='storage_dima')
-    quantity = models.IntegerField(default=0, verbose_name='Кількість у Діми')
+                                      related_name='storage_stickers')
+    quantity_dima = models.IntegerField(default=0, verbose_name='Кількість у Діми')
+    quantity_vlad = models.IntegerField(default=0, verbose_name='Кількість у Влада')
 
     def __str__(self):
-        return f"{self.pk} - {self.quantity}"
+        return f"{self.pk}"
 
     class Meta:
-        verbose_name = 'Склад Діми'
-        verbose_name_plural = 'Склад Діми'
+        verbose_name = 'Склад стікерів'
+        verbose_name_plural = 'Склад стікерів'
         ordering = ['stickers_main']
 
 
-class StickersVlad(models.Model):
-    stickers_main = models.ForeignKey('StickersMain', on_delete=models.CASCADE, verbose_name='ID пака',
-                                      related_name='storage_vlad')
-    quantity = models.IntegerField(default=0, verbose_name='Кількість у Влада')
-
-    def __str__(self):
-        return f"{self.pk} - {self.quantity}"
-
-    class Meta:
-        verbose_name = 'Склад Влада'
-        verbose_name_plural = 'Склад Влада'
-        ordering = ['stickers_main']
