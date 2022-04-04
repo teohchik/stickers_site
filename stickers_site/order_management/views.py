@@ -1,27 +1,30 @@
 from django.shortcuts import render
 from storage.models import StickersStorage
-from storage.forms import StickersStorage
+
 from storage.views import formatting_quantity
-from .forms import GetQuantityDimaForm
+from .forms import GetQuantityDimaForm, GetQuantityVladForm
 
 
 def add_order(request):
     if request.method == 'POST':
-        form = GetQuantityDimaForm(request.POST)
-        if form.is_valid():
-            print('OK')
+        form_dima = GetQuantityDimaForm(request.POST)
+        if form_dima.is_valid():
+            print(form_dima.cleaned_data['quantity_dima'])
+            print(form_dima.cleaned_data['product_pk'])
+
+        form_vlad = GetQuantityVladForm(request.POST)
+        if form_vlad.is_valid():
+            print('OK_vlad')
     else:
-        form = GetQuantityDimaForm()
+        form_dima = GetQuantityDimaForm(request.POST)
+        form_vlad = GetQuantityVladForm(request.POST)
 
-    storage_dima = StickersStorage.objects.select_related('stickers_main').all()
-
-    formatting_quantity(storage_dima)
-
-
+    storages = StickersStorage.objects.select_related('stickers_main').all()
+    formatting_quantity(storages)
 
     context = {
-        "storages": [{'storage': storage_dima, 'owner_storage': 'Склад Діми', 'form': form},
-                     {'storage': storage_dima, 'owner_storage': 'Склад Влада', 'form': form}],
+        'storages': storages,
+        'forms': {'dima': form_dima, 'vlad': form_vlad}
     }
 
     return render(request, 'order_management/add_order.html', context)

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Category, StickersMain, StickersDima, StickersVlad
+from .models import Category, StickersMain, StickersStorage
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -18,15 +18,10 @@ class StickersMainAdmin(admin.ModelAdmin):
     get_image.short_description = "Фото"
 
 
-class StickersDimaAdmin(admin.ModelAdmin):
-    list_display = ('stickers_main', 'quantity')
-
-
-class StickersVladAdmin(admin.ModelAdmin):
-    list_display = ('stickers_main', 'quantity')
+class StickersStorageAdmin(admin.ModelAdmin):
+    list_display = ('stickers_main', 'quantity_dima', 'quantity_vlad')
 
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(StickersMain, StickersMainAdmin)
-admin.site.register(StickersDima, StickersDimaAdmin)
-admin.site.register(StickersVlad, StickersVladAdmin)
+admin.site.register(StickersStorage, StickersStorageAdmin)
