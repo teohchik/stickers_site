@@ -4,6 +4,9 @@
     width: 100%;
     padding-top: 50px;
 }
+ul {
+    list-style-type: none;
+}
 #menu > ul{
     width: 800px;
     display: flex;

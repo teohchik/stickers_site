@@ -1,24 +1,5 @@
-main{
-    width: 50%;
-    margin: 0 auto;
-}
-h2 {
-    text-align: center;
-}
-h3{
-    text-align: center;
-}
 
 #menu > ul > li:nth-child(1) > a{
     color: #FFC0CB;
 }
 
-main{
-    display: flex;
-    justify-content: space-between;
-}
-.content{
-    padding: 20px;
-    background-color: #0a0a0a;
-    text-align: center;
-}

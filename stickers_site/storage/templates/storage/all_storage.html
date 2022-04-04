@@ -1,37 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'base_storage.html' %}
 {% load static %}
+
 {% block title %}
-Склад Дімона і Владоса
+Склад Дімона і Владос
 {% endblock %}
 
 {% block head %}
+{{ block.super }}
 <link rel="stylesheet" href="{% static 'storage/css/all_storage.css' %}">
 {% endblock %}
 
-{% block content %}
-<h2>Склад Дімона і Владоса</h2>
-<main>
-    {% for pack in storages %}
-        <div>
-            <h3>Склад Дімона</h3>
-            <div class="content">
-                <img src="{{ pack.stickers_main.photo.url }}" alt="" width="250px">
-                <p>{{pack.stickers_main.title}}</p>
-                <p>В паці: {{pack.stickers_main.quantity_in_pack}} шт</p>
-                <p>На складі: {{pack.quantity_dima}} шт</p>
-            </div>
-        </div>
 
-        <div>
-            <h3>Склад Владоса</h3>
-            <div class="content">
-                <img src="{{ pack.stickers_main.photo.url }}" alt="" width="250px">
-                <p>{{pack.stickers_main.title}}</p>
-                <p>В паці: {{pack.stickers_main.quantity_in_pack}} шт</p>
-                <p>На складі: {{pack.quantity_vlad}} шт</p>
-            </div>
-        </div>
-    {% endfor %}
-</main>
 
-{% endblock %}
