@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'storage.apps.StorageConfig',
     'order_management.apps.OrderManagementConfig',
+    'bag.apps.BagConfig',
 ]
 
 MIDDLEWARE = [

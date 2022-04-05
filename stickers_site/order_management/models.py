@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from bag.models import Bag
 from storage.models import Category, StickersMain
 
 
@@ -29,7 +30,8 @@ class Order(models.Model):
 class OrderProduct(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категорія')
     product = models.ForeignKey(StickersMain, on_delete=models.CASCADE, verbose_name='Товар')
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Замовлення')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, verbose_name='Замовлення')
+    bag = models.ForeignKey(Bag, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Замовлення')
     quantity = models.IntegerField(verbose_name='Кількість')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Запаковує')
 
