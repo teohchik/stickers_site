@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from storage.models import StickersStorage
 
 from storage.views import formatting_quantity
@@ -10,7 +10,6 @@ def add_order(request):
         form_dima = GetQuantityDimaForm(request.POST)
         if form_dima.is_valid():
             print(form_dima.cleaned_data['quantity_dima'])
-            print(form_dima.cleaned_data['product_pk'])
 
         form_vlad = GetQuantityVladForm(request.POST)
         if form_vlad.is_valid():
@@ -30,6 +29,11 @@ def add_order(request):
     return render(request, 'order_management/add_order.html', context)
 
 
-
+def add_product_for_cart(request, name, pk):
+    form_dima = GetQuantityDimaForm(request.POST)
+    if form_dima.is_valid():
+        print(form_dima.cleaned_data['quantity_dima'])
+    print(name, pk)
+    return redirect('add_order')
 
 
