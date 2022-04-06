@@ -1,0 +1,14 @@
+#menu > ul > li:nth-child(2) > a{
+    color: #FFC0CB!important;
+}
+.button{
+    background-color: #FFC0CB;
+    padding: 8px;
+    color: #0a0a0a;
+    border-radius: 5px;
+}
+.button:hover{
+    background-color: #dedede;
+    color: #0a0a0a;
+    transition-delay: 0.1s;
+}
