@@ -8,30 +8,36 @@
 {% endblock %}
 
 {% block content %}
-<h2>Склад Дімона і Владоса</h2>
+
 <main>
+    <h2>Склад Дімона і Владоса</h2>
+    <div class="main">
+        <h2 style="text-align: center;">Склад Дімона</h2>
+        <h2>Склад Владоса</h2>
+    </div>
     {% for pack in storages %}
-        <div>
-            <h3>Склад Дімона</h3>
-            <div class="content">
-                <img src="{{ pack.stickers_main.photo.url }}" alt="" width="250px">
-                <p>{{pack.stickers_main.title}}</p>
-                <p>В паці: {{pack.stickers_main.quantity_in_pack}} шт</p>
-                <p>На складі: {{pack.quantity_dima}} шт</p>
-                {% block button_dima %}{% endblock %}
-            </div>
+    <div class="main">
+
+        <div class="content">
+            <img src="{{ pack.stickers_main.photo.url }}" alt="" width="250px">
+            <p>{{pack.stickers_main.title}}</p>
+            <p>В паці: {{pack.stickers_main.quantity_in_pack}} шт</p>
+            <p>На складі: {{pack.quantity_dima}} шт</p>
+            {% block button_dima %}{% endblock %}
         </div>
 
-        <div>
-            <h3>Склад Владоса</h3>
-            <div class="content">
-                <img src="{{ pack.stickers_main.photo.url }}" alt="" width="250px">
-                <p>{{pack.stickers_main.title}}</p>
-                <p>В паці: {{pack.stickers_main.quantity_in_pack}} шт</p>
-                <p>На складі: {{pack.quantity_vlad}} шт</p>
-                {% block button_vlad %}{% endblock %}
-            </div>
+
+
+        <div class="content">
+            <img src="{{ pack.stickers_main.photo.url }}" alt="" width="250px">
+            <p>{{pack.stickers_main.title}}</p>
+            <p>В паці: {{pack.stickers_main.quantity_in_pack}} шт</p>
+            <p>На складі: {{pack.quantity_vlad}} шт</p>
+            {% block button_vlad %}{% endblock %}
         </div>
+
+
+    </div>
     {% endfor %}
 </main>
 

@@ -9,15 +9,24 @@ h3{
     text-align: center;
 }
 
-main{
+.main{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+}
+
+.main > h2{
+    width: 100%;
+}
+.main > div{
+    margin-bottom: 10px;
 }
 .content{
     padding: 20px;
     background-color: #0a0a0a;
     text-align: center;
+    padding-bottom: 10px;
 }
 .content > p{
     margin-top: 8px;
+    height: 11px;
 }

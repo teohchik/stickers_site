@@ -2,12 +2,17 @@
     color: #FFC0CB!important;
 }
 .button{
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.button > a{
     background-color: #FFC0CB;
+    margin-top: 20px 0;
     padding: 8px;
     color: #0a0a0a;
     border-radius: 5px;
 }
-.button:hover{
+.button > a:hover{
     background-color: #dedede;
     color: #0a0a0a;
     transition-delay: 0.1s;

@@ -1,12 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-from bag.models import Bag
 from storage.models import Category, StickersMain
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Запаковує')
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='Запаковує')
     status = [
         (1, 'processing'),
         (2, 'success'),
@@ -33,7 +31,7 @@ class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, verbose_name='Замовлення')
     bag = models.BooleanField(verbose_name='В корзині?', default=True)
     quantity = models.IntegerField(verbose_name='Кількість')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Запаковує')
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='Запаковує')
 
     def __str__(self):
         return f"{self.pk}"

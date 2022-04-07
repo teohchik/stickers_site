@@ -1,6 +1,7 @@
+from django.apps import AppConfig
 from django.contrib import admin
 
-from bag.models import Bag, CustomUser
+from bag.models import Bag
 
 
 class BagAdmin(admin.ModelAdmin):
@@ -8,4 +9,3 @@ class BagAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Bag, BagAdmin)
-admin.site.register(CustomUser)
