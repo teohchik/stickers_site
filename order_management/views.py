@@ -11,6 +11,8 @@ def add_bag(request):
     storages = StickersStorage.objects.select_related('stickers_main').all()
     formatting_quantity(storages)
 
+    print(storages[1])
+
     context = {
         'storages': storages,
     }

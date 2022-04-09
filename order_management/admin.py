@@ -10,7 +10,7 @@ admin.site.register(Order, OrderAdmin)
 
 
 class OrderProductAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'category', 'product', 'order', 'quantity', 'user', 'bag',)
+    list_display = ('pk', 'category', 'product', 'order', 'quantity', 'user')
 
 
 admin.site.register(OrderProduct, OrderProductAdmin)
