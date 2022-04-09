@@ -26,11 +26,11 @@ class Order(models.Model):
 
 
 class OrderProduct(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категорія')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1, verbose_name='Категорія')
     product = models.ForeignKey(StickersMain, on_delete=models.CASCADE, verbose_name='Товар')
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, verbose_name='Замовлення')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Замовлення')
     bag = models.BooleanField(verbose_name='В корзині?', default=True)
-    quantity = models.IntegerField(verbose_name='Кількість')
+    quantity = models.IntegerField(verbose_name='Кількість', default=0)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='Запаковує')
 
     def __str__(self):

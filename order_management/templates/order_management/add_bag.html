@@ -13,12 +13,18 @@
 
 {% block button_dima %}
 <div class="button">
-    <a href="dima/{{pack.pk}}/">Додати в корзину</a>
+    <form action="admin/{{pack.pk}}/" method="post">
+        {% csrf_token %}
+        <button>Додати в корзину</button>
+    </form>
 </div>
 {% endblock %}
 {% block button_vlad %}
 <div class="button">
-    <a href="vlad/{{pack.pk}}/" class="button">Додати в корзину</a>
+    <form action="vlad/{{pack.pk}}/" method="post">
+        {% csrf_token %}
+        <button>Додати в корзину</button>
+    </form>
 </div>
 {% endblock %}
 
