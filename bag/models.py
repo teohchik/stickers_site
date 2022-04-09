@@ -1,7 +1,4 @@
-from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404
 
 from storage.models import Category, StickersMain
 
@@ -23,7 +20,7 @@ class Bag(models.Model):
 class BagProduct(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1, verbose_name='Категорія')
     product = models.ForeignKey(StickersMain, on_delete=models.CASCADE, verbose_name='Товар')
-    bag = models.ForeignKey(Bag, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Замовлення')
+    bag = models.ForeignKey(Bag, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Корзина')
     quantity = models.IntegerField(verbose_name='Кількість', default=0)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='Запаковує')
 

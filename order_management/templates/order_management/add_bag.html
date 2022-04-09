@@ -12,20 +12,29 @@
 
 
 {% block button_dima %}
+{% if pack.stickers_main.pk in product_in_bag_dima %}
+<h2>ВЖЕ Є В КОРЗИНІ</h2>
+{% else %}
 <div class="button">
-    <form action="admin/{{pack.pk}}/" method="post">
+    <form action="dima/{{pack.pk}}/" method="post">
         {% csrf_token %}
         <button>Додати в корзину</button>
     </form>
 </div>
+{% endif %}
 {% endblock %}
+
 {% block button_vlad %}
+{% if pack.stickers_main.pk in product_in_bag_vlad %}
+<h2>ВЖЕ Є В КОРЗИНІ</h2>
+{% else %}
 <div class="button">
     <form action="vlad/{{pack.pk}}/" method="post">
         {% csrf_token %}
         <button>Додати в корзину</button>
     </form>
 </div>
+{% endif %}
 {% endblock %}
 
 
