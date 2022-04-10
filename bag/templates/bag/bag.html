@@ -10,8 +10,10 @@
 
 {% include 'inc/_menu.html '%}
 {% block content %}
-<h2 id="main_title">Корзина</h2>
-<form action="">
+
+{% if products_in_bag %}
+<h2 class="main_title">Корзина</h2>
+<form action="" method="post">
     <table>
         <thead>
         <tr>
@@ -21,13 +23,13 @@
             <td>В паці</td>
             <td>Кількість</td>
             <td>Доступно</td>
-
+            <td>Запаковує</td>
         </tr>
         </thead>
         <tbody>
         {% for product_in_bag in products_in_bag %}
         <tr>
-            <td class="product_remove"><a href="#" class="fa fa-times" aria-hidden="true"></a></td>
+            <td class="product_remove"><a href="?remove_item={{ product_in_bag.pk }}" class="fa fa-times" aria-hidden="true"></a></td>
             <td><img src="{{ product_in_bag.product.photo.url }}" alt="" width="140px"></td>
             <td>{{ product_in_bag.product.title }}</td>
             <td>{{ product_in_bag.product.quantity_in_pack }} шт</td>
@@ -38,6 +40,7 @@
                        value="{{ product_in_bag.quantity }}"
             ></td>
             <td>{{ product_in_bag.product.storage_stickers.quantity_dima }} шт</td>
+            <td>{{ product_in_bag.user }}</td>
         </tr>
         {% endfor %}
         <tr class="tr_bottom">
@@ -57,12 +60,15 @@
 
                 </div>
             </td>
-            <td colspan="2">
-                <button class="button">Обновити корзину</button>
+            <td colspan="3">
+                <button class="button" type="submit">Обновити корзину</button>
             </td>
         </tr>
         </tbody>
     </table>
 </form>
+{% else %}
+<h2 class="main_title">Корзина пуста</h2>
+{% endif %}
 {% endblock %}
 
