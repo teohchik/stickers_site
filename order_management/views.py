@@ -13,7 +13,7 @@ def add_bag(request):
         formatting_quantity(storages)
 
         # Получаємо список товарів, які вже в корзині
-        bag = Bag.objects.get(pk=request.user)
+        bag = check_bag(request.user)
         product_in_bag = BagProduct.objects.filter(bag=bag).values("product", "user")
 
         product_in_bag_dima = []
@@ -36,19 +36,23 @@ def add_bag(request):
 
 
 def add_product_for_bag(request, name, pk):
-    user = request.user
-    try:
-        bag = Bag.objects.get(pk=user)
-    except Bag.DoesNotExist:
-        bag = Bag.objects.create(user=user)
-
     # Додаємо товар до корзини
     product = StickersMain.objects.get(pk=pk)
-    user = User.objects.filter(username=name).get()
+    bag_user = request.user
+    user_packing = User.objects.filter(username=name).get()
+
+    bag = check_bag(bag_user)
 
     # Перевіряємо, чи є данний товар вже в корзині
-    flag = BagProduct.objects.filter(product=product, user=user, bag=True)
+    flag = BagProduct.objects.filter(product=product, user=user_packing, bag=bag)
     if not flag:
-        BagProduct.objects.create(user=user, product=product, bag=bag)
-
+        BagProduct.objects.create(user=user_packing, product=product, bag=bag)
     return redirect('add_bag')
+
+
+def check_bag(user):
+    try:
+        bag = Bag.objects.get(pk=user)
+        return bag
+    except Bag.DoesNotExist:
+        Bag.objects.create(user=user)

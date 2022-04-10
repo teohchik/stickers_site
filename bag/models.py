@@ -5,8 +5,8 @@ from storage.models import Category, StickersMain
 
 class Bag(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE, primary_key=True, verbose_name='Запаковує')
-    price = models.IntegerField(verbose_name='Сума', blank=True, null=True)
-    ttn = models.CharField(max_length=255, blank=True, null=True, verbose_name='ТТН')
+    price = models.IntegerField(verbose_name='Сума', default=0)
+    ttn = models.CharField(max_length=255, default=0, verbose_name='ТТН')
 
     def __str__(self):
         return f"{self.user}"
@@ -19,7 +19,7 @@ class Bag(models.Model):
 
 class BagProduct(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1, verbose_name='Категорія')
-    product = models.ForeignKey(StickersMain, on_delete=models.CASCADE, verbose_name='Товар')
+    product = models.ForeignKey(StickersMain, on_delete=models.CASCADE, verbose_name='Товар', related_name='product')
     bag = models.ForeignKey(Bag, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Корзина')
     quantity = models.IntegerField(verbose_name='Кількість', default=0)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='Запаковує')

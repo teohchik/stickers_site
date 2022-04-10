@@ -38,7 +38,7 @@ class StickersMain(models.Model):
 
 
 class StickersStorage(models.Model):
-    stickers_main = models.ForeignKey('StickersMain', on_delete=models.CASCADE, verbose_name='ID пака',
+    stickers_main = models.OneToOneField('StickersMain', on_delete=models.CASCADE, verbose_name='ID пака',
                                       related_name='storage_stickers')
     quantity_dima = models.IntegerField(default=0, verbose_name='Кількість у Діми')
     quantity_vlad = models.IntegerField(default=0, verbose_name='Кількість у Влада')

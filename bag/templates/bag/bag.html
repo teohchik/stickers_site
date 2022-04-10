@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Корзина
+{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'bag/css/bag.css' %}">
+{% endblock %}
+
+{% include 'inc/_menu.html '%}
+{% block content %}
+<h2 id="main_title">Корзина</h2>
+<form action="">
+    <table>
+        <thead>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Товар</td>
+            <td>В паці</td>
+            <td>Кількість</td>
+            <td>Доступно</td>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for product_in_bag in products_in_bag %}
+        <tr>
+            <td class="product_remove"><a href="#" class="fa fa-times" aria-hidden="true"></a></td>
+            <td><img src="{{ product_in_bag.product.photo.url }}" alt="" width="140px"></td>
+            <td>{{ product_in_bag.product.title }}</td>
+            <td>{{ product_in_bag.product.quantity_in_pack }} шт</td>
+            <td><input type="number"
+                       step="{{ product_in_bag.product.quantity_in_pack }}"
+                       min="0"
+                       max="{{ product_in_bag.product.storage_stickers.quantity_dima }}"
+                       value="{{ product_in_bag.quantity }}"
+            ></td>
+            <td>{{ product_in_bag.product.storage_stickers.quantity_dima }} шт</td>
+        </tr>
+        {% endfor %}
+        <tr class="tr_bottom">
+            <td colspan="3">
+                <div id="product_ttn">
+                    <p>ТТН:</p>
+                    <input type="text"
+                           value="{{ bag.ttn }}">
+                </div>
+            </td>
+            <td colspan="1">
+                <div id="product_price">
+                    <p>Сума:</p>
+                    <input type="text"
+                           min="0"
+                           value="{{ bag.price }}">
+
+                </div>
+            </td>
+            <td colspan="2">
+                <button class="button">Обновити корзину</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+{% endblock %}
+
