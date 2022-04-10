@@ -8,28 +8,31 @@ from storage.views import formatting_quantity
 
 
 def add_bag(request):
-    storages = StickersStorage.objects.select_related('stickers_main').all()
-    formatting_quantity(storages)
+    if request.user.is_authenticated:
+        storages = StickersStorage.objects.select_related('stickers_main').all()
+        formatting_quantity(storages)
 
-    # Получаємо список товарів, які вже в корзині
-    bag = Bag.objects.get(pk=request.user)
-    product_in_bag = BagProduct.objects.filter(bag=bag).values("product", "user")
+        # Получаємо список товарів, які вже в корзині
+        bag = Bag.objects.get(pk=request.user)
+        product_in_bag = BagProduct.objects.filter(bag=bag).values("product", "user")
 
-    product_in_bag_dima = []
-    product_in_bag_vlad = []
-    for el in product_in_bag:
-        if el['user'] == 1:
-            product_in_bag_dima.append(el["product"])
-        else:
-            product_in_bag_vlad.append(el["product"])
+        product_in_bag_dima = []
+        product_in_bag_vlad = []
+        for el in product_in_bag:
+            if el['user'] == 1:
+                product_in_bag_dima.append(el["product"])
+            else:
+                product_in_bag_vlad.append(el["product"])
 
-    context = {
-        'storages': storages,
-        'product_in_bag_dima': product_in_bag_dima,
-        'product_in_bag_vlad': product_in_bag_vlad,
-    }
+        context = {
+            'storages': storages,
+            'product_in_bag_dima': product_in_bag_dima,
+            'product_in_bag_vlad': product_in_bag_vlad,
+        }
 
-    return render(request, 'order_management/add_bag.html', context)
+        return render(request, 'order_management/add_bag.html', context)
+    else:
+        return render(request, 'access_is_blocked.html', {})
 
 
 def add_product_for_bag(request, name, pk):

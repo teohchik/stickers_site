@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Доступ заблоковано
+{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/access_is_blocked.css' %}">
+{% endblock %}
+
+{% include 'inc/_menu.html '%}
+{% block content %}
+<h1>Доступ заблоковано</h1>
+{% endblock %}
