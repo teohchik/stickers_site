@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect
 
 from bag.models import BagProduct, Bag
-from order_management.views import check_bag
+from order_management.services.add_product_for_bag import check_bag
 
 
 def creation_context(request):
