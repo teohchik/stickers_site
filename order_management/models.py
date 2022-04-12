@@ -4,7 +4,7 @@ from storage.models import Category, StickersMain
 
 
 class Order(models.Model):
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='Запаковує')
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='Оформив')
     status = [
         (1, 'processing'),
         (2, 'success'),

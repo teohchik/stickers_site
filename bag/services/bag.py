@@ -1,3 +1,4 @@
+from django.db import transaction
 from django.shortcuts import get_object_or_404, redirect
 
 from bag.models import BagProduct, Bag
@@ -35,6 +36,7 @@ def remove_item_from_bag(remove_item_id, user):
         bag.save()
 
 
+@transaction.atomic
 def update_data_in_bag(request):
     """
     Оновлення корзини
@@ -57,4 +59,4 @@ def update_data_in_bag(request):
     new_price = request.POST.get('price')
     Bag.objects.filter(pk=request.user).update(price=new_price)
 
-    return redirect('bag')
+
