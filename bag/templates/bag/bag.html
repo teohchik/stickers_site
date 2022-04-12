@@ -12,68 +12,101 @@
 {% block content %}
 
 {% if products_in_bag %}
-<h2 class="main_title">Корзина</h2>
-<form action="" method="post">
-    {% csrf_token %}
-    <table>
-        <thead>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>Товар</td>
-            <td>В паці</td>
-            <td>Кількість</td>
-            <td>Доступно</td>
-            <td>Запаковує</td>
-        </tr>
-        </thead>
-        <tbody>
-        {% for product_in_bag in products_in_bag %}
-        <tr>
-            <td class="product_remove"><a href="?remove_item={{ product_in_bag.pk }}" class="fa fa-times" aria-hidden="true"></a></td>
-            <td><img src="{{ product_in_bag.product.photo.url }}" alt="" width="140px"></td>
-            <td>{{ product_in_bag.product.title }}</td>
-            <td>{{ product_in_bag.product.quantity_in_pack }} шт</td>
-            <td>
-                <input type="number"
-                       step="{{ product_in_bag.product.quantity_in_pack }}"
-                       min="0"
-                       max="{{ product_in_bag.product.storage_stickers.quantity_dima }}"
-                       value="{{ product_in_bag.quantity }}"
-                       name="{{ product_in_bag.pk }}"
-                >
-            </td>
-            <td>{{ product_in_bag.product.storage_stickers.quantity_dima }} шт</td>
-            <td>{{ product_in_bag.user }}</td>
-        </tr>
-        {% endfor %}
-        <tr class="tr_bottom">
-            <td colspan="3">
-                <div id="product_ttn">
-                    <p>ТТН:</p>
-                    <input type="text"
-                           value="{{ bag.ttn }}"
-                           name="ttn">
-                </div>
-            </td>
-            <td colspan="1">
-                <div id="product_price">
-                    <p>Сума:</p>
-                    <input type="number"
-                           step="50"
-                           min="0"
-                           value="{{ bag.price }}"
-                           name="price">
+<main>
+    <h2 class="main_title">Корзина</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+            <thead>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Товар</td>
+                <td>В паці</td>
+                <td>Кількість</td>
+                <td>Доступно</td>
+                <td>Запаковує</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product_in_bag in products_in_bag %}
+            <tr>
+                <td class="product_remove"><a href="?remove_item={{ product_in_bag.pk }}" class="fa fa-times" aria-hidden="true"></a></td>
+                <td><img src="{{ product_in_bag.product.photo.url }}" alt="" width="140px"></td>
+                <td>{{ product_in_bag.product.title }}</td>
+                <td>{{ product_in_bag.product.quantity_in_pack }} шт</td>
 
-                </div>
-            </td>
-            <td colspan="3">
-                <button class="button" type="submit">Обновити корзину</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</form>
+                {% if product_in_bag.user.username == "dima" %}
+                <td>
+
+
+                    <input type="number"
+                           step="{{ product_in_bag.product.quantity_in_pack }}"
+                           min="0"
+
+                           max="{{ product_in_bag.product.storage_stickers.quantity_dima }}"
+                           value="{{ product_in_bag.quantity }}"
+                           name="{{ product_in_bag.pk }}"
+                    >
+
+                </td>
+                <td>{{ product_in_bag.product.storage_stickers.quantity_dima }} шт</td>
+                {% else %}
+                <td>
+
+
+                    <input type="number"
+                           step="{{ product_in_bag.product.quantity_in_pack }}"
+                           min="0"
+
+                           max="{{ product_in_bag.product.storage_stickers.quantity_vlad }}"
+                           value="{{ product_in_bag.quantity }}"
+                           name="{{ product_in_bag.pk }}"
+                    >
+
+                </td>
+                <td>{{ product_in_bag.product.storage_stickers.quantity_vlad }} шт</td>
+                {% endif %}
+
+
+                <td>{{ product_in_bag.user }}</td>
+            </tr>
+            {% endfor %}
+            <tr class="tr_bottom">
+                <td colspan="3">
+                    <div id="product_ttn">
+                        <p>ТТН:</p>
+                        <input type="text"
+                               value="{{ bag.ttn }}"
+                               name="ttn">
+                    </div>
+                </td>
+                <td colspan="1">
+                    <div id="product_price">
+                        <p>Сума:</p>
+                        <input type="number"
+                               step="50"
+                               min="0"
+                               value="{{ bag.price }}"
+                               name="price">
+
+                    </div>
+                </td>
+                <td colspan="3">
+                    <button class="button" type="submit">Обновити корзину</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </form>
+    <div>
+        <form action="add_order/" method="post" class="add_order">
+            {% csrf_token %}
+            <button class="button" type="submit">Додати замовлення</button>
+        </form>
+    </div>
+</main>
 {% else %}
 <h2 class="main_title">Корзина пуста</h2>
 {% endif %}

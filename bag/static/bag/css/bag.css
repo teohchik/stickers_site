@@ -1,11 +1,14 @@
-#menu > ul > li:nth-child(3) > a{
+#menu > ul > li:nth-child(4) > a{
     color: #FFC0CB;
-   }
+}
 
-table{
+main{
     max-width: 1220px;
     width: 100%;
     margin: 0 auto;
+}
+table{
+    width: 100%;
 }
 .main_title{
     text-align: center;
@@ -51,6 +54,13 @@ input{
     vertical-align: middle;
     overflow: visible;
 }
+.tr_bottom div{
+    display: flex;
+    justify-content: center;
+}
+.tr_bottom p{
+    padding-right: 10px;
+}
 #product_ttn input{
     width: 300px;
 }
@@ -61,4 +71,15 @@ input{
 .button{
     text-transform: uppercase;
     padding: 13px 30px;
+    border: none;
+}
+.add_order{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+.add_order > button{
+    background-color: #FFC0CB;
+    padding: 15px 35px;
+    font-weight: bold;
 }
