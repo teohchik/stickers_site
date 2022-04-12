@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 from storage.models import Category, StickersMain
 
@@ -7,6 +8,9 @@ class Bag(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE, primary_key=True, verbose_name='Запаковує')
     price = models.IntegerField(verbose_name='Сума', default=0)
     ttn = models.CharField(max_length=255, default=0, verbose_name='ТТН')
+
+    def get_absolute_url(self):
+        return reverse('bag')
 
     def __str__(self):
         return f"{self.user}"
