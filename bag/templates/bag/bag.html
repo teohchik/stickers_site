@@ -41,9 +41,7 @@
 
 
                     <input type="number"
-                           step="{{ product_in_bag.product.quantity_in_pack }}"
                            min="0"
-
                            max="{{ product_in_bag.product.storage_stickers.quantity_dima }}"
                            value="{{ product_in_bag.quantity }}"
                            name="{{ product_in_bag.pk }}"
@@ -56,9 +54,7 @@
 
 
                     <input type="number"
-                           step="{{ product_in_bag.product.quantity_in_pack }}"
                            min="0"
-
                            max="{{ product_in_bag.product.storage_stickers.quantity_vlad }}"
                            value="{{ product_in_bag.quantity }}"
                            name="{{ product_in_bag.pk }}"
@@ -85,7 +81,6 @@
                     <div id="product_price">
                         <p>Сума:</p>
                         <input type="number"
-                               step="50"
                                min="0"
                                value="{{ bag.price }}"
                                name="price">
