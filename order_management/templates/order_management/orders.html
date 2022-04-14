@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Замовлення
+{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'order_management/css/orders.css' %}">
+{% endblock %}
+
+{% include 'inc/_menu.html '%}
+{% block content %}
+<main>
+    <h2>Замовлення</h2>
+    <table>
+        <thead>
+        <tr>
+            <td>Замовлення</td>
+            <td>Дата</td>
+            <td>Статус</td>
+            <td>Сума</td>
+            <td>Накладна</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order_info in orders_info %}
+        <tr>
+            <td style="padding: 7px;">{{order_info.pk}}</td>
+            <td>{{ order_info.date|date:"j E, o"}}</td>
+            <td>{{order_info.status}}</td>
+            <td>{{order_info.price}} грн.</td>
+            <td>{{order_info.ttn}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</main>
+
+{% endblock %}
