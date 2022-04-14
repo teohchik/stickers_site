@@ -9,7 +9,7 @@ main{
 }
 table{
     width: 100%;
-    order-collapse:collapse;
+    border-collapse:collapse;
 }
 .main_title{
     text-align: center;
