@@ -25,39 +25,32 @@
         <tbody>
         {% for order_info in page_obj %}
         <tr>
-            <td><a href="#">{{order_info.pk}}</a></td>
-            <td><a href="#">{{ order_info.date|date:"j E, o"}}</a></td>
+            <td><a href="{{order_info.get_absolute_url}}">{{order_info.pk}}</a></td>
+            <td><a href="{{order_info.get_absolute_url}}">{{ order_info.date|date:"j E, o"}}</a></td>
             {% if order_info.status == 1 %}
-                <td><a href="#" class="processing status">Обробка</a></td>
+                <td><a href="{{order_info.get_absolute_url}}" class="processing status">Обробка</a></td>
             {% elif order_info.status == 2 %}
-                <td><a href="#" class="success status">Виконаний</a></td>
+                <td><a href="{{order_info.get_absolute_url}}" class="success status">Виконаний</a></td>
             {% else %}
-                <td><a href="#" class="error status">Помилка</a></td>
+                <td><a href="{{order_info.get_absolute_url}}" class="error status">Помилка</a></td>
             {% endif %}
-            <td><a href="#">{{order_info.price}} грн.</a></td>
-            <td><a href="#">{{order_info.ttn}}</a></td>
+            <td><a href="{{order_info.get_absolute_url}}">{{order_info.price}} грн.</a></td>
+            <td><a href="{{order_info.get_absolute_url}}">{{order_info.ttn}}</a></td>
         </tr>
         {% endfor %}
         </tbody>
     </table>
     <nav>
         <ul>
-            {% if page_obj.has_previous %}
-            <li><a href="?page={{page_obj.previous_page_number}}">«Попередня</a></li>
-            {% endif %}
-
-            {% for p in page_obj.paginator.page_range %}
-
-            <li>
-                {% if p == page_obj.number %}
-                <a id="active">{{ p }}</a>
-                {% else%}
-                <a href="?page={{p}}">{{p}}</a>
+            {% if page_obj.has_other_pages %}
+                {% if page_obj.has_previous %}
+                <li><a href="?page={{page_obj.previous_page_number}}">«Попередня</a></li>
                 {% endif %}
-            </li>
-            {% endfor %}
-            {% if page_obj.has_next %}
-            <li><a href="?page={{page_obj.next_page_number}}">Наступна»</a></li>
+                <li>{{page_obj.number}} з {{page_num_pages}}</li>
+
+                {% if page_obj.has_next %}
+                <li><a href="?page={{page_obj.next_page_number}}">Наступна»</a></li>
+                {% endif %}
             {% endif %}
         </ul>
     </nav>
