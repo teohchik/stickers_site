@@ -21,14 +21,16 @@ def add_product_for_bag(request, name, pk):
 
 def orders(request):
     orders_info = get_orders_info()
-    paginator = Paginator(orders_info, 1)
+    paginator = Paginator(orders_info, 20)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    page_num_pages = paginator.num_pages
 
     context = {
         'orders_info': orders_info,
         'page_obj': page_obj,
+        'page_num_pages': page_num_pages,
     }
     return render(request, 'order_management/orders.html', context)
 
