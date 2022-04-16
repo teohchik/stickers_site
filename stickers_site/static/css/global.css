@@ -19,6 +19,6 @@ a:hover{
     transition-delay: 0.1s;
 }
 
-p, a, h1, h2, h3, h4, h5, h6, td{
+p, a, h1, h2, h3, h4, h5, h6, td, li{
     color: #dedede;
 }
