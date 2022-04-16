@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 
 from order_management.services.add_product_for_bag import creation_context, add_product_for_bag_func
-from order_management.services.orders import get_orders_info
+from order_management.services.orders import get_orders_info, get_order_info
 
 
 def add_bag(request):
@@ -28,6 +28,14 @@ def orders(request):
 
     context = {
         'orders_info': orders_info,
-        'page_obj': page_obj
+        'page_obj': page_obj,
     }
     return render(request, 'order_management/orders.html', context)
+
+
+def order(request, pk):
+    order_info = get_order_info(pk)
+    context = {
+        'order': order_info,
+    }
+    return render(request, 'order_management/order.html', context)

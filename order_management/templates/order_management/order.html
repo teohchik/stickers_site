@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Замовлення {{order.pk}}
+{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'order_management/css/order.css' %}">
+{% endblock %}
+
+{% include 'inc/_menu.html '%}
+{% block content %}
+<main>
+
+</main>
+{% endblock %}

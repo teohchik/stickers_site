@@ -28,4 +28,4 @@ def bag(request):
 def add_order(request):
     add_order_func(request)
 
-    return redirect('bag')
+    return redirect('orders')
