@@ -16,6 +16,9 @@ class Order(models.Model):
     price = models.IntegerField(verbose_name='Сума')
     ttn = models.CharField(max_length=255, blank=True, verbose_name='ТТН')
 
+    def get_absolute_url(self):
+        return f"/order/{self.pk}"
+
     def __str__(self):
         return f"{self.pk}"
 
