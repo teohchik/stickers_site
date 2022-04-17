@@ -1,3 +1,7 @@
+#menu > ul > li:nth-child(3) > a{
+    color: #FFC0CB!important;
+}
+
 main{
     max-width: 1220px;
     width: 100%;
