@@ -38,3 +38,4 @@ def add_order_func(request):
                                     quantity=quantity_in_bag,
                                     user=user_to_pack)
     bag.delete()
+    return order

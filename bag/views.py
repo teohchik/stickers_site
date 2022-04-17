@@ -26,6 +26,6 @@ def bag(request):
 
 
 def add_order(request):
-    add_order_func(request)
+    order = add_order_func(request)
 
-    return redirect('orders')
+    return redirect(order.get_absolute_url())
