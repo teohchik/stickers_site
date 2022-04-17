@@ -6,9 +6,9 @@ from storage.models import Category, StickersMain
 class Order(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='Оформив')
     status = [
-        (1, 'processing'),
-        (2, 'success'),
-        (3, 'error'),
+        (1, 'Обробка'),
+        (2, 'Виконано'),
+        (3, 'Помилка'),
     ]
 
     status = models.PositiveSmallIntegerField('Статус замовлення', choices=status, default=1)
