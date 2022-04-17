@@ -20,6 +20,7 @@
             <td>Статус</td>
             <td>Сума</td>
             <td>Накладна</td>
+            <td>Створив</td>
         </tr>
         </thead>
         <tbody>
@@ -30,12 +31,13 @@
             {% if order_info.status == 1 %}
                 <td><a href="{{order_info.get_absolute_url}}" class="processing status">Обробка</a></td>
             {% elif order_info.status == 2 %}
-                <td><a href="{{order_info.get_absolute_url}}" class="success status">Виконаний</a></td>
+                <td><a href="{{order_info.get_absolute_url}}" class="success status">Виконано</a></td>
             {% else %}
                 <td><a href="{{order_info.get_absolute_url}}" class="error status">Помилка</a></td>
             {% endif %}
             <td><a href="{{order_info.get_absolute_url}}">{{order_info.price}} грн.</a></td>
             <td><a href="{{order_info.get_absolute_url}}">{{order_info.ttn}}</a></td>
+            <td><a href="{{order_info.get_absolute_url}}">{{order_info.user}}</a></td>
         </tr>
         {% endfor %}
         </tbody>
