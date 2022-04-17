@@ -1,8 +1,9 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 
+from order_management.forms import EditOrder
 from order_management.services.add_product_for_bag import creation_context, add_product_for_bag_func
-from order_management.services.orders import get_orders_info, get_order_info
+from order_management.services.orders import get_orders_info, get_order_info, get_items_in_order
 
 
 def add_bag(request):
@@ -37,7 +38,18 @@ def orders(request):
 
 def order(request, pk):
     order_info = get_order_info(pk)
+    items_in_order = get_items_in_order(pk)
+
+    if request.method == 'GET':
+        form = EditOrder(instance=order_info)
+    else:
+        form = EditOrder(request.POST, instance=order_info)
+        if form.is_valid():
+            form.save()
+            return redirect('orders')
     context = {
         'order': order_info,
+        'form': form,
+        'items_in_order': items_in_order,
     }
     return render(request, 'order_management/order.html', context)

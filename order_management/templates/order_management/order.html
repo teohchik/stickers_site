@@ -11,6 +11,45 @@
 {% include 'inc/_menu.html '%}
 {% block content %}
 <main>
+    <h2>Замовлення № {{order.pk}}</h2>
+    <div>
+        {{ form.status.errors }}
+        <form action="" method="POST">
+            {%csrf_token%}
 
+            <div>
+
+                <label>Статус замовлення:</label>
+                {{form.status}}
+            </div>
+            <button class="button" type="submit">Оновити</button>
+        </form>
+    </div>
+    <div id="info_order">
+        <p>ТТН: {{order.ttn}}</p>
+        <p>Сума: {{order.price}}</p>
+        <p>Створив: {{order.user}}</p>
+    </div>
+    <h3>Товари в замовленні</h3>
+    <table>
+        <thead>
+            <tr>
+                <td></td>
+                <td>Позиція</td>
+                <td>Запакував</td>
+                <td>Кількість</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items_in_order %}
+            <tr>
+                <td ><img src="{{ item.product.photo.url }}" alt="" width="140px"></td>
+                <td>{{ item.product.title }}</td>
+                <td>{{ item.user }}</td>
+                <td>{{ item.quantity }} шт</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
 </main>
 {% endblock %}
