@@ -10,5 +10,5 @@ class StorageQuantityApiView(generics.ListAPIView):
 
 
 class ProductsInfoApiView(generics.ListAPIView):
-    queryset = StickersMain.objects.all()
+    queryset = StickersMain.objects.filter(is_published=True).prefetch_related('storage_stickers')
     serializer_class = ProductsInfoSerializer
