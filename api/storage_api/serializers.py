@@ -6,10 +6,13 @@ from storage.models import StickersStorage, StickersMain
 class StorageQuantitySerializer(serializers.ModelSerializer):
     class Meta:
         model = StickersStorage
-        fields = ('stickers_main', 'quantity_dima', 'quantity_vlad',)
+        fields = ('quantity_dima', 'quantity_vlad',)
 
 
 class ProductsInfoSerializer(serializers.ModelSerializer):
+    storage_stickers = StorageQuantitySerializer(read_only=True)
+
     class Meta:
         model = StickersMain
-        fields = ('title', 'total_quantity', 'quantity_in_pack', 'created_at', 'photo', 'category', 'is_published',)
+        fields = (
+            'pk', 'storage_stickers', 'title', 'total_quantity', 'quantity_in_pack', 'photo')
