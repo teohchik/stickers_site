@@ -1,8 +1,9 @@
-from django.urls import path
+from django.urls import path, include
 
-from .storage_api.views import StorageQuantityApiView, ProductsInfoApiView
+from .storage_api.urls import product_patterns
+
 
 urlpatterns = [
-    path('v1/storage_list/', StorageQuantityApiView.as_view()),
-    path('v1/product_info_list/', ProductsInfoApiView.as_view()),
+    path('v1/storage/', include(product_patterns)),
 ]
+
