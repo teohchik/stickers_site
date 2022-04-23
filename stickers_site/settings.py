@@ -38,6 +38,8 @@ INSTALLED_APPS = [
 
     'debug_toolbar',
     'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
 
     'storage',
     'order_management',
@@ -104,6 +106,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
