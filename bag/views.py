@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-
+from order_management.models import OrderProduct
 from .services.add_order import add_order_func
 from .services.bag import remove_item_from_bag, update_data_in_bag, creation_context
 
@@ -26,6 +26,6 @@ def bag(request):
 
 
 def add_order(request):
-    order = add_order_func(request)
+    order = add_order_func(request, user=request.user)
 
-    return redirect(order.get_absolute_url())
+    return redirect(OrderProduct().get_absolute_url())

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 from storage.models import Category, StickersMain
 
@@ -34,6 +35,9 @@ class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Замовлення')
     quantity = models.IntegerField(verbose_name='Кількість')
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='Запаковує')
+
+    def get_absolute_url(self):
+        return f"/orders/"
 
     def __str__(self):
         return f"{self.pk}"
