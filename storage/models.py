@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.shortcuts import get_object_or_404
 
@@ -24,8 +25,14 @@ class StickersMain(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        flag = get_object_or_404(StickersMain, pk=self.pk)
-        if flag:
+        flag1 = get_object_or_404(StickersMain, pk=self.pk)
+        flag2 = False
+        try:
+            flag2 = StickersStorage.objects.get(stickers_main=flag1)
+        except ObjectDoesNotExist:
+            pass
+
+        if flag1 and not flag2:
             StickersStorage.objects.create(stickers_main_id=self.pk)
 
     def __str__(self):
@@ -50,5 +57,3 @@ class StickersStorage(models.Model):
         verbose_name = 'Склад стікерів'
         verbose_name_plural = 'Склад стікерів'
         ordering = ['stickers_main']
-
-
