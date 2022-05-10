@@ -7,7 +7,6 @@ from order_management.models import OrderProduct, Order
 from storage.models import StickersStorage
 
 
-@transaction.atomic
 def add_order_func(request, user):
     # Створюємо замовлення і наповнюємо його даними з корзини
     if type(user) == int:
@@ -26,22 +25,24 @@ def add_order_func(request, user):
         product_id = product.product
         quantity_in_bag = product.quantity
         user_to_pack = product.user
-
         request_user = f"admin_{request.user.username}"
         # Віднімаємо quantity в StickersStorage
-        if user_to_pack == 'dima':
+        if user_to_pack.username == 'dima':
             if product_id.storage_stickers.quantity_dima - quantity_in_bag >= 0:
                 product_id.storage_stickers.quantity_dima -= quantity_in_bag
             else:
+                transaction.rollback()
                 return HTTP_409_CONFLICT
+
         else:
             if product_id.storage_stickers.quantity_vlad - quantity_in_bag >= 0:
                 product_id.storage_stickers.quantity_vlad -= quantity_in_bag
             else:
+                transaction.rollback()
                 return HTTP_409_CONFLICT
-        product_id.storage_stickers.save()
 
         order.save()
+        product_id.storage_stickers.save()
         OrderProduct.objects.create(category=category,
                                     product=product_id,
                                     order=order,
