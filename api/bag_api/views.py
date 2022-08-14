@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_409_CONFLICT
-
+from django.contrib.auth.models import User
 from api.bag_api.serializers import BagProductsSerializer, BagSerializer
 from bag.models import BagProduct, Bag
 from bag.services.add_order import add_order_func
@@ -31,9 +31,14 @@ class BagApiView(generics.RetrieveUpdateAPIView):
 
 @api_view(['GET'])
 def create_order(request, pk):
-    order = add_order_func(request, pk)
+    order = add_order_func(pk)
+    request_user = User.objects.get(pk=pk)
+
+    check_bag(request_user)
+
     if order == 409:
         return Response(status=HTTP_409_CONFLICT)
     else:
         check_bag(request.user)
         return JsonResponse({"pk_order": f"{order}"})
+

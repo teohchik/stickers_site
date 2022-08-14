@@ -7,7 +7,7 @@ from order_management.models import OrderProduct, Order
 from storage.models import StickersStorage
 
 
-def add_order_func(request, user):
+def add_order_func(user):
     # Створюємо замовлення і наповнюємо його даними з корзини
     if type(user) == int:
         user = User.objects.get(pk=user)
@@ -25,7 +25,7 @@ def add_order_func(request, user):
         product_id = product.product
         quantity_in_bag = product.quantity
         user_to_pack = product.user
-        request_user = f"admin_{request.user.username}"
+
         # Віднімаємо quantity в StickersStorage
         if user_to_pack.username == 'dima':
             if product_id.storage_stickers.quantity_dima - quantity_in_bag >= 0:
